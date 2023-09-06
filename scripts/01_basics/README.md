@@ -8,3 +8,19 @@ Some scripts to get you started with this repo.
 
 Simply loads a UR5e urdf into Blender of which you can pose the joints by clicking the arrows and pressing `R` to rotate.
 
+### 02 - [UR5e with Robotiq 2F-85](./02_ur5e_robotiq.py)
+
+![UR5e with Robotiq](https://i.imgur.com/htUjVdt.png)
+
+Shows how you can parent a gripper to the tool link of the UR5e.
+
+### 03 - [UR5e animated](./03_ur5e_animated.py)
+
+![UR5e animted](https://i.imgur.com/Vkp5YhO.gif)
+
+To create the animation, render it as a sequence of png files.
+Convert the png files to a video using ffmpeg:
+```
+ffmpeg -framerate 24 -i %04d.png output.mp4
+```
+To turn that video into a gif, I followed this [guide](http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html#usage).
