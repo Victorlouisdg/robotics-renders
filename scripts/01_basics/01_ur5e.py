@@ -1,6 +1,6 @@
 import airo_blender as ab
-import urdf_workshop
 import bpy
+import urdf_workshop
 
 bpy.ops.object.delete()
 
