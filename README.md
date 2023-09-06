@@ -1,14 +1,21 @@
 # robotics-renders
 
+![UR5e](https://i.imgur.com/mNYP60Y.png)
 
-## Local Development
+Illustrations and animations of robotics concepts using Blender.
+We build the Blender scenes using Python scripts as much of possible.
 
-### Local installation
+## Getting started :rocket:
 
-- clone this repo
-- create the conda environment `conda env create -f environment.yaml`
-- initialize the pre-commit hooks `pre-commit install`
+After completing the installation, see the [scripts](./scripts/) folder for the available scripts.
+Run them with Blender like so:
+
+```
+blender -P scripts/01_basics/01_ur5e.py
+```
 
 
-### Running formatting, linting and testing
-The makefile contains commands to make this convenient. Run using `make <command>`.
+## Installation :cd:
+
+First install [airo-blender](https://github.com/airo-ugent/airo-blender) and then the [urdf-workshop](https://github.com/Victorlouisdg/urdf-workshop).
+Then clone the repo and run the scripts.
