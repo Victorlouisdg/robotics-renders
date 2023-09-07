@@ -1,16 +1,11 @@
 import bpy
 import numpy as np
+from robotics_renders.robots.posing import set_joint_angles
 from robotics_renders.robots.ur5e_with_robotiq import add_ur5e_with_robotiq
-
-
-def set_joint_angles(joint_angles, arm_joints):
-    for joint, joint_angle in zip(arm_joints.values(), joint_angles):
-        joint.rotation_euler = (0, 0, joint_angle)
-
 
 bpy.ops.object.delete()
 
-arm_joints, gripper_joint = add_ur5e_with_robotiq()
+_, _, _, arm_joints, gripper_joint = add_ur5e_with_robotiq()
 # home_joints = np.deg2rad([-180, -30, 75, -135, -45, 0])
 initial_joints = np.zeros(6)
 home_joints = np.deg2rad([180, -45, -90, -45, 0, 0])

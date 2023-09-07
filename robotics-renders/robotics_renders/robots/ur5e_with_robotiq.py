@@ -18,4 +18,9 @@ def add_ur5e_with_robotiq():
     gripper_joint = gripper_joints["finger_joint"]
     gripper_joint.rotation_euler = (0, 0, np.deg2rad(42))
 
-    return arm_joints, gripper_joint
+    links = {**arm_links, **gripper_links}
+
+    base_links = [link for link in links.values() if link.parent is None]
+    base_link = base_links[0]
+
+    return base_link, arm_links, gripper_links, arm_joints, gripper_joint
