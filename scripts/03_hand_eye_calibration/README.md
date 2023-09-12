@@ -11,3 +11,11 @@ Simply loads a ZED2i camera into Blender.
 ![Hand-to_eye](https://i.imgur.com/f0BQUiS.png)
 
 Shows the transform that is searched in hand-to-eye calibration.
+
+### 03 - Charuco board creation
+Script to load an image of a charuco board into Blender.
+
+### 04 - [Charuco board detection](./04_charuco_detection.py)
+![Charuco detection](https://i.imgur.com/BvIhjoe.gif)
+
+Shows that a single camera can detect the pose of a charuco board relative to itself.
