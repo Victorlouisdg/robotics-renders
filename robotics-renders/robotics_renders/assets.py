@@ -1,8 +1,12 @@
+from typing import Any
+
 import airo_blender as ab
 import bpy
 
 
-def load_collection_asset_as_real(name: str, relative_path: str, library: str, type: str, **kwargs) -> bpy.types.ID:
+def load_collection_asset_as_real(
+    name: str, relative_path: str, library: str, type: str, **kwargs: Any
+) -> bpy.types.Object:
     # This messy code turns the collection instance to a real object and removes the extra empty that was created
     collection = ab.load_asset(name, relative_path, library, type, **kwargs)
     bpy.ops.object.collection_instance_add(collection=collection.name)

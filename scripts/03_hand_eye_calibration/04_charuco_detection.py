@@ -44,7 +44,7 @@ zed2i_info = [asset for asset in assets if asset["name"] == "ZED2i"][0]
 zed2i = load_collection_asset_as_real(**zed2i_info)
 zed2i.location = (0, 0, 1.0)
 zed2i.rotation_euler = (0, np.deg2rad(15), 0)
-zed2i_left = zed2i.children[0]
+zed2i_left = zed2i.children[0]  # type: ignore
 
 bpy.context.view_layer.update()
 zed2i_left_pose = blender_to_airo_camera_pose_convention(zed2i_left.matrix_world)
@@ -63,13 +63,12 @@ for i, (location, rotation_euler) in enumerate(keyposes):
 bpy.context.scene.frame_end = frame
 
 # Read the interpolated locations
-charuco_locations = []
 for i in range(1, frame):
     bpy.context.scene.frame_set(i)
-    location = np.array(charuco.matrix_world)[:3, 3]
+    interpolated_location = np.array(charuco.matrix_world)[:3, 3]
 
     start = zed2i_left_pose[:3, 3]
-    end = location
+    end = interpolated_location
     path = linear_path(start, end)
     soft_yellow = (1.0, 0.8, 0.1)
 
@@ -88,7 +87,7 @@ bpy.context.scene.frame_set(1)
 # Setting up the scene camera
 camera = bpy.data.objects["Camera"]
 camera.location = (-0.45, 1.5, 1.55)
-camera.rotation_euler = np.deg2rad([66.8, 0.0, 212.0])
+camera.rotation_euler = np.deg2rad([66.8, 0.0, 212.0])  # type: ignore
 
 
 # Add a large ground plane

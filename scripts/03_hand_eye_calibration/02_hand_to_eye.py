@@ -27,7 +27,7 @@ zed2i.rotation_euler = (0, np.deg2rad(15), 0)
 # ur5e = ab.import_urdf(urdf_workshop.ur5e)
 # ur5e.location = (1.0, 0, 0)
 
-ur5e, _, _, ur5e_joints, _ = add_ur5e_with_robotiq()
+ur5e, _, _, ur5e_joints, _ = add_ur5e_with_robotiq()  # type: ignore
 
 ur5e.location = (1.5, 0, 0)
 # home_joints = np.deg2rad([-180, -30, 75, -135, -45, 0])
@@ -37,10 +37,10 @@ set_joint_angles(home_joints, ur5e_joints)
 # Setting up the scene camera
 camera = bpy.data.objects["Camera"]
 camera.location = (2.25, 3, 1.7)
-camera.rotation_euler = np.deg2rad([69.0, 0.0, 155.0])
+camera.rotation_euler = np.deg2rad([69.0, 0.0, 155.0])  # type: ignore
 
 
-zed2i_left = zed2i.children[0]
+zed2i_left = zed2i.children[0]  # type: ignore
 zed2i_left_pose = blender_to_airo_camera_pose_convention(zed2i_left.matrix_world)
 
 bpy.context.view_layer.update()

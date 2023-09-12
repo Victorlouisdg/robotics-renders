@@ -5,7 +5,8 @@ from robotics_renders.robots.ur5e_with_robotiq import add_ur5e_with_robotiq
 
 bpy.ops.object.delete()
 
-_, _, _, arm_joints, gripper_joint = add_ur5e_with_robotiq()
+# not sure what the type problem is here
+_, _, _, arm_joints, _ = add_ur5e_with_robotiq()  # type: ignore
 # home_joints = np.deg2rad([-180, -30, 75, -135, -45, 0])
 initial_joints = np.zeros(6)
 home_joints = np.deg2rad([180, -45, -90, -45, 0, 0])
@@ -29,8 +30,8 @@ for i, t in enumerate(t_values):
 
 # Setting up the camera
 camera = bpy.data.objects["Camera"]
-camera.location = np.array([0.1, 4.2802, 1.63528])
-camera.rotation_euler = np.deg2rad([74.4, 0.0, 180.0])
+camera.location = np.array([0.1, 4.2802, 1.63528])  # type: ignore
+camera.rotation_euler = np.deg2rad([74.4, 0.0, 180.0])  # type: ignore
 
 scene = bpy.context.scene
 scene.render.engine = "CYCLES"

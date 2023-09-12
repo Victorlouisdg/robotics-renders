@@ -1,9 +1,20 @@
+from typing import Dict, Tuple
+
 import airo_blender as ab
+import bpy
 import numpy as np
 import urdf_workshop
 
 
-def add_ur5e_with_robotiq():
+def add_ur5e_with_robotiq() -> (
+    Tuple[
+        bpy.types.Object,
+        Dict[str, bpy.types.Object],
+        Dict[str, bpy.types.Object],
+        Dict[str, bpy.types.Object],
+        bpy.types.Object,
+    ]
+):
     arm_joints, _, arm_links = ab.import_urdf(urdf_workshop.ur5e)
     tool_link = arm_links["wrist_3_link"]
 

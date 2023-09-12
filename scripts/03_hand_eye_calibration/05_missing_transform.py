@@ -25,7 +25,7 @@ zed2i = load_collection_asset_as_real(**zed2i_info)
 zed2i.location = (0, 0, 1.0)
 zed2i.rotation_euler = (0, np.deg2rad(15), 0)
 
-ur5e, ur5e_links, _, ur5e_joints, _ = add_ur5e_with_robotiq()
+ur5e, ur5e_links, _, ur5e_joints, _ = add_ur5e_with_robotiq()  # type: ignore
 
 ur5e.location = (1.5, 0, 0)
 home_joints = np.deg2rad([270, -45, -90, -45, 0, 120])
@@ -34,9 +34,9 @@ set_joint_angles(home_joints, ur5e_joints)
 # Setting up the scene camera
 camera = bpy.data.objects["Camera"]
 camera.location = (2.25, 3, 1.7)
-camera.rotation_euler = np.deg2rad([69.0, 0.0, 155.0])
+camera.rotation_euler = np.deg2rad([69.0, 0.0, 155.0])  # type: ignore
 
-zed2i_left = zed2i.children[0]
+zed2i_left = zed2i.children[0]  # type: ignore
 zed2i_left_pose = blender_to_airo_camera_pose_convention(zed2i_left.matrix_world)
 
 charuco_info = [asset for asset in assets if asset["name"] == "airo_charuco"][0]
@@ -45,8 +45,8 @@ bpy.context.scene.collection.objects.link(charuco)
 
 board_offset = np.array([0.0, 0.06, 0.48])
 orientation = Matrix.Rotation(-np.pi / 2, 3, "Y")
-local_Z = orientation.col[2]
-orientation = Matrix.Rotation(-np.pi / 2 - np.pi / 4, 3, local_Z) @ orientation
+local_Z = orientation.col[2]  # type: ignore
+orientation = Matrix.Rotation(-np.pi / 2 - np.pi / 4, 3, local_Z) @ orientation  # type: ignore
 board_transform = np.identity(4)
 board_transform[:3, :3] = orientation  # .to_numpy()
 board_transform[:3, 3] = board_offset
