@@ -5,25 +5,18 @@
 # to update: conda env update -f environment.yaml
 name: robotics-renders
 channels:
-  - pytorch
   - conda-forge
 dependencies:
   - python=3.10
-  - pytorch
-  - cudatoolkit=11.3
-  - torchvision
   - pip
   - pip:
     - numpy
     - matplotlib
     - scipy
     - wandb
-    - pytorch-lightning
-    - imageio
-    - albumentations
-    - timm
     - pytest
     - pre-commit
     - mypy
     - darglint
+    - fake-bpy-module-3.4
     - -e robotics-renders/
