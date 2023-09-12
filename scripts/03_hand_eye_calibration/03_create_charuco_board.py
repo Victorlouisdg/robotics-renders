@@ -31,6 +31,7 @@ board.data.transform(Matrix.Translation((x_shift, y_shift, 0)))
 board.matrix_world = Matrix.Identity(4)
 
 # Now in the open .blend file you can save the board as an asset.
-# I also like to add a slight thickness with the solidify modifier, just for visualization purposes.
+# I also like to add a slight thickness (e.g. 3 mm) with the solidify modifier, just for visualization purposes.
+# You might also have to fix the UV unwrapping etc.
 # If you don't be sure to enable the backface culling option for the material of the board so that its not double-sided.
 # board.data.materials[0].use_backface_culling = True

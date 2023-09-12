@@ -5,6 +5,8 @@ import airo_blender as ab
 import bpy
 import numpy as np
 from linen.blender.frame import add_frame
+from linen.blender.path import add_path
+from linen.path.linear import linear_path
 from robotics_renders.assets import load_collection_asset_as_real
 from robotics_renders.coordinate_conventions import blender_to_airo_camera_pose_convention
 
@@ -33,14 +35,6 @@ pose2 = (location2, rotation_euler2)
 keyposes = [pose0, pose1, pose2, pose0]
 frames_between_poses = 50
 
-for i, (location, rotation_euler) in enumerate(keyposes):
-    charuco.location = location
-    charuco.rotation_euler = rotation_euler
-    frame = i * frames_between_poses + 1
-    charuco.keyframe_insert(data_path="location", frame=frame)
-    charuco.keyframe_insert(data_path="rotation_euler", frame=frame)
-
-bpy.context.scene.frame_end = frame
 
 charuco_pose = add_frame(np.identity(4), 0.1, name="Charuco Pose")
 charuco_pose.parent = charuco
@@ -55,6 +49,41 @@ zed2i_left = zed2i.children[0]
 bpy.context.view_layer.update()
 zed2i_left_pose = blender_to_airo_camera_pose_convention(zed2i_left.matrix_world)
 add_frame(zed2i_left_pose, 0.2, name="ZED2i Left Pose", radius_height_ratio=0.025)
+
+
+# Animate board and path to board
+for i, (location, rotation_euler) in enumerate(keyposes):
+    charuco.location = location
+    charuco.rotation_euler = rotation_euler
+    frame = i * frames_between_poses + 1
+    charuco.keyframe_insert(data_path="location", frame=frame)
+    charuco.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+
+bpy.context.scene.frame_end = frame
+
+# Read the interpolated locations
+charuco_locations = []
+for i in range(1, frame):
+    bpy.context.scene.frame_set(i)
+    location = np.array(charuco.matrix_world)[:3, 3]
+
+    start = zed2i_left_pose[:3, 3]
+    end = location
+    path = linear_path(start, end)
+    soft_yellow = (1.0, 0.8, 0.1)
+
+    if i == 1:  # Create the path
+        _, instances = add_path(path, points_per_second=50, color=soft_yellow, radius=0.006)
+    else:  # Animate the path
+        n = len(instances)
+        points = [path(t) for t in np.linspace(path.start_time, path.end_time, n, endpoint=True)]
+        for instance, point in zip(instances, points):
+            instance.location = point
+            instance.keyframe_insert(data_path="location", frame=i)
+
+bpy.context.scene.frame_set(1)
+
 
 # Setting up the scene camera
 camera = bpy.data.objects["Camera"]
