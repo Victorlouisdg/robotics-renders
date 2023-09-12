@@ -1,6 +1,6 @@
 # robotics-renders
 
-![Banner](https://i.imgur.com/f0BQUiS.png)
+![Banner](https://i.imgur.com/y2x5oGs.png)
 
 Illustrations and animations of robotics concepts using Blender.
 We build the Blender scenes using Python scripts as much of possible.

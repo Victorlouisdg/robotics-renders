@@ -19,3 +19,8 @@ Script to load an image of a charuco board into Blender.
 ![Charuco detection](https://i.imgur.com/BvIhjoe.gif)
 
 Shows that a single camera can detect the pose of a charuco board relative to itself.
+
+### 05 - [Missing transform](./05_missing_transform.py)
+![Missing transform](https://i.imgur.com/y2x5oGs.png)
+
+Shows the missing, but constant, transform between the end-effector frame and the board.
