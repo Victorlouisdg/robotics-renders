@@ -24,3 +24,11 @@ Convert the png files to a video using ffmpeg:
 ffmpeg -framerate 24 -i %04d.png output.mp4
 ```
 To turn that video into a gif, I followed this [guide](http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html#usage).
+
+### 04 - [Reference frames](./04_reference_frames.py)
+
+TODO: finish
+
+### 05 [UR5e and shelves](./05_ur5e_and_shelves.py)
+
+![UR5e and shelves](https://i.imgur.com/LUqLoPv.png)
